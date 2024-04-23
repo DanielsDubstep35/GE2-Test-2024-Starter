@@ -1,12 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://b26ra08yh7e5m"]
+[gd_scene load_steps=12 format=3 uid="uid://b26ra08yh7e5m"]
 
 [ext_resource type="Script" path="res://behaviors/root.gd" id="1_prfgg"]
 [ext_resource type="Script" path="res://exam/creature_generator.gd" id="2_f5m8p"]
 [ext_resource type="Script" path="res://behaviors/FPController.gd" id="5_8r2ni"]
 [ext_resource type="Environment" uid="uid://b5dnnkkpxo3qc" path="res://behaviors/seek_environment..tres" id="6_qamsj"]
+[ext_resource type="Script" path="res://behaviors/SpineAnimator.gd" id="6_sgctb"]
+[ext_resource type="Script" path="res://exam/Creature.gd" id="6_yw1f3"]
+[ext_resource type="PackedScene" uid="uid://cefj30qbij4tp" path="res://Stuff/boid_head.tscn" id="7_axqer"]
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="7_ybx0x"]
+[ext_resource type="PackedScene" uid="uid://bmojynkn7osms" path="res://Stuff/boid_part.tscn" id="8_8kqh5"]
 
 [sub_resource type="SphereShape3D" id="18"]
+
+[sub_resource type="Curve3D" id="Curve3D_52dk0"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -14.8824, -19.76, 75.8359, 0, 0, 0, 0, 0, 0, 6.54148, 22.0161, -81.5872, 0, 0, 0, 0, 0, 0, 120.492, 14.3768, -86.9281, 0, 0, 0, 0, 0, 0, 117.743, -25.2091, 57.1594, 0, 0, 0, 0, 0, 0, -88.4487, -9.34271, 59.4281),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="exam" type="Node3D"]
 script = ExtResource("1_prfgg")
@@ -37,3 +48,27 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 light_volumetric_fog_energy = 0.0
 
 [node name="SceneSwitcher" parent="." instance=ExtResource("7_ybx0x")]
+
+[node name="Creature" type="Node" parent="."]
+script = ExtResource("6_yw1f3")
+
+[node name="spineanimator" type="Node" parent="Creature"]
+script = ExtResource("6_sgctb")
+bonePaths = [NodePath("../boidHead"), NodePath("../body2"), NodePath("../body3"), NodePath("../body4"), NodePath("../boidTail")]
+
+[node name="boidHead" parent="Creature" instance=ExtResource("7_axqer")]
+
+[node name="body2" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.5154)
+
+[node name="body3" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.5154)
+
+[node name="body4" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.5154)
+
+[node name="boidTail" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.5154)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_52dk0")

@@ -1,13 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmojynkn7osms"]
+[gd_scene load_steps=2 format=3 uid="uid://bmojynkn7osms"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtc42"]
-transparency = 1
-albedo_color = Color(0.227451, 1, 1, 0.313726)
+[ext_resource type="Material" uid="uid://bx2hv4ijvies0" path="res://Stuff/coolBlueShader.tres" id="1_qsl8b"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_bncv7"]
-material = SubResource("StandardMaterial3D_vtc42")
-
-[node name="BoidPart" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_bncv7")
+[node name="BoidPart" type="CSGBox3D"]
+material = ExtResource("1_qsl8b")

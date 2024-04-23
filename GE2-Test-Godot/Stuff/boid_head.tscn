@@ -1,27 +1,73 @@
-[gd_scene load_steps=6 format=3 uid="uid://cefj30qbij4tp"]
+[gd_scene load_steps=13 format=3 uid="uid://cefj30qbij4tp"]
 
-[ext_resource type="Script" path="res://Stuff/Harmonic.gd" id="1_npp47"]
-[ext_resource type="Script" path="res://Stuff/NoiseWanderer.gd" id="2_j7iec"]
-[ext_resource type="Script" path="res://Stuff/SteeringBehaviour.gd" id="3_frreb"]
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_k6k6u"]
+[ext_resource type="Material" uid="uid://bx2hv4ijvies0" path="res://Stuff/coolBlueShader.tres" id="2_84l0n"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="3_l0hr4"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="4_gwy2b"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="5_mwkg4"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="6_okbvx"]
+[ext_resource type="Script" path="res://behaviors/FollowPath.gd" id="7_25nax"]
+[ext_resource type="Script" path="res://behaviors/Seek.gd" id="8_4a6ho"]
+[ext_resource type="Script" path="res://behaviors/Arrive.gd" id="9_pt0we"]
+[ext_resource type="Script" path="res://behaviors/PlayerSteering.gd" id="10_wuua7"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_ol26p"]
+[sub_resource type="PrismMesh" id="14"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2en86"]
-transparency = 1
-albedo_color = Color(1, 0.301961, 1, 0.313726)
+[sub_resource type="BoxShape3D" id="15"]
 
-[node name="Boid" type="Node3D"]
+[node name="boid" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
+script = ExtResource("1_k6k6u")
+max_force = 50
+banking = 0.07
+damping = 0.3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, -1.5246e-23, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 0)
-mesh = SubResource("PrismMesh_ol26p")
-surface_material_override/0 = SubResource("StandardMaterial3D_2en86")
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("14")
+material = ExtResource("2_84l0n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("15")
+
+[node name="Avoidance" type="Node" parent="."]
+script = ExtResource("3_l0hr4")
 
 [node name="Harmonic" type="Node" parent="."]
-script = ExtResource("1_npp47")
+script = ExtResource("4_gwy2b")
+frequency = 0.5
+distance = 10
+axis = 1
+weight = 6.0
 
-[node name="NoiseWanderer" type="Node" parent="."]
-script = ExtResource("2_j7iec")
+[node name="Constrain" type="Node" parent="."]
+script = ExtResource("5_mwkg4")
+center_path = NodePath("../../../Center")
 
-[node name="SteeringBehaviour" type="Node" parent="."]
-script = ExtResource("3_frreb")
+[node name="NoiseWander" type="Node" parent="."]
+script = ExtResource("6_okbvx")
+radius = 50.0
+amplitude = 90
+distance = 100
+draw_gizmos = false
+
+[node name="PathFollow3D" type="Node" parent="."]
+script = ExtResource("7_25nax")
+path_path = NodePath("../../../Path3D")
+waypoint_seek_distance = 5
+weight = 3.0
+
+[node name="Seek" type="Node" parent="."]
+script = ExtResource("8_4a6ho")
+draw_gizmos = false
+enabled = false
+
+[node name="Arrive" type="Node" parent="."]
+script = ExtResource("9_pt0we")
+draw_gizmos = false
+enabled = false
+
+[node name="UserSteering" type="Node" parent="."]
+script = ExtResource("10_wuua7")
+draw_gizmos = false
+enabled = false

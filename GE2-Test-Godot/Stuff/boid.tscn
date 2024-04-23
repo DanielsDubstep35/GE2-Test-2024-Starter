@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6sac1e0co4lv"]
+
+[ext_resource type="Script" path="res://behaviors/Boid.gd" id="1_q7g7s"]
+[ext_resource type="Material" uid="uid://b2raijlysriqd" path="res://behaviors/Tank Material.tres" id="2_hxyg8"]
+[ext_resource type="Script" path="res://behaviors/Avoidance.gd" id="3_pcbrh"]
+[ext_resource type="Script" path="res://behaviors/Harmonic.gd" id="4_26m0b"]
+[ext_resource type="Script" path="res://behaviors/Constrain.gd" id="5_a8p3v"]
+[ext_resource type="Script" path="res://behaviors/NoiseWander.gd" id="6_dskv8"]
+[ext_resource type="Script" path="res://behaviors/FollowPath.gd" id="7_rra72"]
+[ext_resource type="Script" path="res://behaviors/Seek.gd" id="8_vs7j2"]
+[ext_resource type="Script" path="res://behaviors/Arrive.gd" id="9_0h71q"]
+[ext_resource type="Script" path="res://behaviors/PlayerSteering.gd" id="10_hyf3q"]
+
+[sub_resource type="PrismMesh" id="14"]
+
+[sub_resource type="BoxShape3D" id="15"]
+
+[node name="boid" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
+script = ExtResource("1_q7g7s")
+max_force = 50
+banking = 0.07
+damping = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("14")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("2_hxyg8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("15")
+
+[node name="Avoidance" type="Node" parent="."]
+script = ExtResource("3_pcbrh")
+
+[node name="Harmonic" type="Node" parent="."]
+script = ExtResource("4_26m0b")
+frequency = 0.5
+distance = 10
+axis = 1
+weight = 6.0
+
+[node name="Constrain" type="Node" parent="."]
+script = ExtResource("5_a8p3v")
+center_path = NodePath("../../../Center")
+
+[node name="NoiseWander" type="Node" parent="."]
+script = ExtResource("6_dskv8")
+radius = 50.0
+amplitude = 90
+distance = 100
+draw_gizmos = false
+
+[node name="PathFollow3D" type="Node" parent="."]
+script = ExtResource("7_rra72")
+path_path = NodePath("../../../Path3D")
+waypoint_seek_distance = 5
+weight = 3.0
+
+[node name="Seek" type="Node" parent="."]
+script = ExtResource("8_vs7j2")
+draw_gizmos = false
+enabled = false
+
+[node name="Arrive" type="Node" parent="."]
+script = ExtResource("9_0h71q")
+draw_gizmos = false
+enabled = false
+
+[node name="UserSteering" type="Node" parent="."]
+script = ExtResource("10_hyf3q")
+draw_gizmos = false
+enabled = false
