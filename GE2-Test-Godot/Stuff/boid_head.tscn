@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cefj30qbij4tp"]
+
+[ext_resource type="Script" path="res://Stuff/Harmonic.gd" id="1_npp47"]
+[ext_resource type="Script" path="res://Stuff/NoiseWanderer.gd" id="2_j7iec"]
+[ext_resource type="Script" path="res://Stuff/SteeringBehaviour.gd" id="3_frreb"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ol26p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2en86"]
+transparency = 1
+albedo_color = Color(1, 0.301961, 1, 0.313726)
+
+[node name="Boid" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, -1.5246e-23, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_ol26p")
+surface_material_override/0 = SubResource("StandardMaterial3D_2en86")
+
+[node name="Harmonic" type="Node" parent="."]
+script = ExtResource("1_npp47")
+
+[node name="NoiseWanderer" type="Node" parent="."]
+script = ExtResource("2_j7iec")
+
+[node name="SteeringBehaviour" type="Node" parent="."]
+script = ExtResource("3_frreb")
