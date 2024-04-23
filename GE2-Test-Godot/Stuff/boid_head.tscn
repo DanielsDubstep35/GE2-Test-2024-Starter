@@ -15,7 +15,7 @@
 
 [sub_resource type="BoxShape3D" id="15"]
 
-[node name="boid" type="CharacterBody3D"]
+[node name="boid" type="CharacterBody3D" groups=["boidHead", "boidPart"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
 script = ExtResource("1_k6k6u")
 max_force = 50

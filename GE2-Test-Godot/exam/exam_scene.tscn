@@ -54,7 +54,7 @@ script = ExtResource("6_yw1f3")
 
 [node name="spineanimator" type="Node" parent="Creature"]
 script = ExtResource("6_sgctb")
-bonePaths = [NodePath("../boidHead"), NodePath("../body2"), NodePath("../body3"), NodePath("../body4"), NodePath("../boidTail")]
+bonePaths = [NodePath("../boidHead"), NodePath("../body2"), NodePath("../body3"), NodePath("../body4"), NodePath("../boidTail"), null, null, null, null, null, null]
 
 [node name="boidHead" parent="Creature" instance=ExtResource("7_axqer")]
 
@@ -67,8 +67,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.5154)
 [node name="body4" parent="Creature" instance=ExtResource("8_8kqh5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.5154)
 
-[node name="boidTail" parent="Creature" instance=ExtResource("8_8kqh5")]
+[node name="body5" parent="Creature" instance=ExtResource("8_8kqh5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.5154)
+
+[node name="body6" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5154)
+
+[node name="body7" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5154)
+
+[node name="body8" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4846)
+
+[node name="body9" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.4846)
+
+[node name="body10" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.4846)
+
+[node name="boidTail" parent="Creature" instance=ExtResource("8_8kqh5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.4846)
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_52dk0")
