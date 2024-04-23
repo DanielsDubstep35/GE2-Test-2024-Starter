@@ -54,7 +54,7 @@ script = ExtResource("6_yw1f3")
 
 [node name="spineanimator" type="Node" parent="Creature"]
 script = ExtResource("6_sgctb")
-bonePaths = [NodePath("../boidHead"), NodePath("../body2"), NodePath("../body3"), NodePath("../body4"), NodePath("../boidTail"), null, null, null, null, null, null]
+bonePaths = [NodePath("../boidHead"), NodePath("../body2"), NodePath("../body3"), NodePath("../body4"), NodePath("../body5"), NodePath("../body6"), NodePath("../body7"), NodePath("../body8"), NodePath("../body9"), NodePath("../body10"), NodePath("../boidTail")]
 
 [node name="boidHead" parent="Creature" instance=ExtResource("7_axqer")]
 

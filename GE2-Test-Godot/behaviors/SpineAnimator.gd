@@ -54,8 +54,10 @@ func _physics_process(delta):
 		# var next_rot = nextRot.slerp(prevRot, angular_damping * delta).orthonormalized()		 
 		next.global_transform.basis = next.global_transform.basis.slerp(target_rot, angular_damping * delta).orthonormalized()
 		
-func find_BoidParts():
+func find_AllBoidParts():
+	var boidPartArray = []
 	for i in get_parent().find_children("*"):
 		if i.is_in_group("boidPart"):
-			bonePaths.append(i.get_path())
+			boidPartArray.append(i.get_path())
+	return boidPartArray
 	
