@@ -19,7 +19,7 @@ func _process(delta):
 	for i in 180:
 		sin_size = i/10
 		if i == 90 || i == 179:
-			print(sin_size)
+			pass
 		
 func on_draw_gizmos():
 	DebugDraw3D.draw_sphere(Vector3.ZERO, sin_size, Color.RED, 5)

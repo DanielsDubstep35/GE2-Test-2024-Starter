@@ -10,15 +10,18 @@ func _ready():
 	boidPieces = find_BoidPiece()
 	
 func _process(delta):
-	for i in range(1, 180):
+	for i in 90:
 		for piece in boidPieces:
-			piece.size = Vector3(1, 1 / i, 1)
+			var sine = sin(deg_to_rad(i))
+			piece.scale.y = sine
+			print("scale piece is: " + str(piece.scale.y))
+			print("scale name is: " + str(piece.name))
 
 func find_BoidPiece():
 	var boidPartArray : Array[CSGBox3D] = []
 	for i in find_children("*"):
 		if i.is_in_group("boidPart"):
-			boidPartArray.append(i.get_node(i.get_path()))
+			boidPartArray.append(i)
 	return boidPartArray
 
 func find_BoidHead():
