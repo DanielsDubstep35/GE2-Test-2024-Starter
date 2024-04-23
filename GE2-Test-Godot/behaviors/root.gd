@@ -2,7 +2,17 @@ class_name Root extends Node3D
 
 var custom_font:Font
 
+var GamePaused = false
+
 func _input(event):
+	
+	if event is InputEventKey and event.pressed and event.keycode == KEY_P && !GamePaused:
+		Engine.time_scale = 0
+		GamePaused = true
+	elif event is InputEventKey and event.pressed and event.keycode == KEY_P && GamePaused:
+		Engine.time_scale = 1
+		GamePaused = false
+	
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
