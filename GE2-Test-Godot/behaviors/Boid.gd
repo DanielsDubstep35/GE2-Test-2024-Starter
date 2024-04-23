@@ -15,7 +15,6 @@ var behaviors = []
 @export var damping = 0.1
 
 @export var draw_gizmos = true
-@export var pause = false
 
 var count_neighbors = false
 var neighbors = [] 
@@ -77,10 +76,6 @@ func count_neighbors_simple():
 			if neighbors.size() == school.max_neighbors:
 				break
 	return neighbors.size()
-
-func _input(event):
-	if event is InputEventKey and event.keycode == KEY_P and event.pressed:
-		pause = ! pause
 		
 func set_enabled(behavior, enabled):
 	behavior.enabled = enabled
@@ -172,29 +167,28 @@ func _process(delta):
 			count_neighbors_simple()
 			
 func _physics_process(delta):
-	# pause = true
 	# lerp in the new forces
 	if not Engine.is_editor_hint():
 		if should_calculate:
 			new_force = calculate()
 			should_calculate = false		
 		force = lerp(force, new_force, delta)
-		if ! pause:
-			acceleration = force / mass
-			vel += acceleration * delta
-			speed = vel.length()
-			if speed > 0:		
-				if max_speed == 0:
-					print("max_speed is 0")
-				vel = vel.limit_length(max_speed)
-				
-				# Damping
-				vel -= vel * delta * damping
-				
-				set_velocity(vel)
-				move_and_slide()
-				
-				# Implement Banking as described:
-				# https://www.cs.toronto.edu/~dt/siggraph97-course/cwr87/
-				var temp_up = global_transform.basis.y.lerp(Vector3.UP + (acceleration * banking), delta * 5.0)
-				look_at(global_transform.origin - vel.normalized(), temp_up)
+		
+		acceleration = force / mass
+		vel += acceleration * delta
+		speed = vel.length()
+		if speed > 0:		
+			if max_speed == 0:
+				print("max_speed is 0")
+			vel = vel.limit_length(max_speed)
+			
+			# Damping
+			vel -= vel * delta * damping
+			
+			set_velocity(vel)
+			move_and_slide()
+			
+			# Implement Banking as described:
+			# https://www.cs.toronto.edu/~dt/siggraph97-course/cwr87/
+			var temp_up = global_transform.basis.y.lerp(Vector3.UP + (acceleration * banking), delta * 5.0)
+			look_at(global_transform.origin - vel.normalized(), temp_up)

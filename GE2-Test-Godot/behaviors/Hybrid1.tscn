@@ -46,8 +46,16 @@ boid_player = NodePath("../../../camera follower")
 [node name="camera follower" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973738, -15.0557, 41.7624)
 script = ExtResource("9")
-max_force = 30
-draw_gizmos = false
+mass = null
+force = null
+acceleration = null
+vel = null
+speed = null
+max_speed = null
+max_force = null
+banking = null
+damping = null
+draw_gizmos = null
 
 [node name="OffsetPursue" type="Node" parent="camera follower"]
 script = ExtResource("11")
@@ -95,6 +103,16 @@ script = ExtResource("19")
 bonePaths = [NodePath("../boid"), NodePath("../body1"), NodePath("../body2"), NodePath("../body3"), NodePath("../tail")]
 
 [node name="boid" parent="creature" instance=ExtResource("11_ho1os")]
+mass = null
+force = null
+acceleration = null
+vel = null
+speed = null
+max_speed = null
+max_force = null
+banking = null
+damping = null
+draw_gizmos = null
 
 [node name="tail" type="CharacterBody3D" parent="creature"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.26002)

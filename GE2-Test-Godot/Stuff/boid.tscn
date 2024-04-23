@@ -18,9 +18,16 @@
 [node name="boid" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5154)
 script = ExtResource("1_q7g7s")
-max_force = 50
-banking = 0.07
-damping = 0.3
+mass = null
+force = null
+acceleration = null
+vel = null
+speed = null
+max_speed = null
+max_force = null
+banking = null
+damping = null
+draw_gizmos = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, 0, 0)
